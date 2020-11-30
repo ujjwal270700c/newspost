@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Latest News</h1>
+<br>
+<br>
+
+<div>
+   <label for="">Creater your Post</label>
+  <a href="/post" class="loginhere-link">ADD POST</a>
+
+</div>
+
+
+<div id="box"></div>
+<div id="list"></div>
+
+
+
+
+<style>
+  #list div{
+    background-color: lightblue;
+    border: 1px solid;
+  }
+</style>
+
+
+
+<script>
+// const newsSh=require("../src/models/news")
+document.addEventListener('DOMContentLoaded',() =>{
+async function fetchdata() {
+    const res = await fetch("http://localhost:7500/news");
+    const data = await res.json();
+    console.log(data);
+     for (let i = 0; i < data.length; i++) {
+      var node = document.createElement("div");
+      node.innerHTML = `Title:${data[i].title}`;
+      var node1 = document.createElement("div");
+      node1.innerHTML = `Content: ${data[i].body}`;
+      var node2 = document.createElement("div");
+      node2.innerHTML = `Author: ${data[i].created_by}`;
+      var space = document.createElement("br");
+      document.getElementById("list").appendChild(node);
+      document.getElementById("list").appendChild(node1);
+      document.getElementById("list").appendChild(node2);
+       document.getElementById("list").appendChild(space);
+    }
+  }
+  fetchdata();
+} )
+
+</script>
+
+</body>
+</html>
